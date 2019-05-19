@@ -7,7 +7,8 @@ import pytest
 import torch
 
 from fastai_audio.audio_clip import open_audio
-from fastai_audio.transform import Spectrogram, ToDecibels, FrequencyToMel
+from fastai_audio.transform import get_frequency_batch_transforms, Spectrogram, ToDecibels, FrequencyToMel
+from fastai_audio.data import AudioItemList
 
 
 DATA_PATH = Path('tests/data')
@@ -15,7 +16,9 @@ DATA_PATH = Path('tests/data')
 
 def get_data():
     # load data from example files
-    clips = [open_audio(fn) for fn in DATA_PATH.iterdir()]
+    fns = list(DATA_PATH.iterdir())
+    fns = [fn for fn in fns if str(fn).endswith('wav')]
+    clips = [open_audio(fn) for fn in fns]
     sample_rate = clips[0].sample_rate
     tensors = [clip.data for clip in clips]
     # make them all the same length so they can be combined into a batch
@@ -110,3 +113,32 @@ def test_freq_to_mel(n_fft, n_mels, f_min, f_max):
                               n_mels=n_mels, sr=sr,
                               f_min=f_min, f_max=f_max)
     check_isclose(mel_tensor, mel_np)
+
+
+def test_databunch():
+    msg = None
+    try:
+        tfms = get_frequency_batch_transforms(
+            n_fft=512, n_hop=128, n_mels=64, sample_rate=44100)
+    except Exception as e:
+        msg = e
+    finally:
+        assert msg is None
+
+    msg = None
+    try:
+        import pandas as pd
+        df = pd.read_csv(DATA_PATH/'sample.csv')
+        db = AudioItemList.from_df(
+            df, DATA_PATH
+        ).split_none(
+        ).label_from_df(
+            'label'
+        ).databunch(
+            bs=1, tfms=tfms
+        )
+    except Exception as e:
+        msg = e
+    finally:
+        assert msg is None
+        db.sanity_check()
