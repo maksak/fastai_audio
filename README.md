@@ -5,6 +5,9 @@ This is an experimental and unofficial module add-on for the new [`fastai v1`](h
 The accompanying article can be found here:
 [Audio Classification using FastAI and On-the-Fly Frequency Transforms](https://medium.com/@johnhartquist/audio-classification-using-fastai-and-on-the-fly-frequency-transforms-4dbe1b540f89)
 
+### Installation
+`pip install git+https://github.com/maksak/fastai_audio.git` or `pip install git+https://github.com/maksak/fastai_audio.git@v1.0.51`.
+
 ##### Related Links
 * [fastai v1 docs](https://docs.fastai.com)
 
@@ -13,7 +16,7 @@ The [`fastai`](https://github.com/fastai/fastai) library is currently being deve
 
 #### Dependencies
 * python 3.6
-* fastai 1.0.43
+* fastai 1.0.51
 * librosa 0.6.2 
 
 This repo was also heavily inspired by [torchaudio](http://pytorch.org/audio/), especially [`transforms.py`](http://pytorch.org/audio/_modules/torchaudio/transforms.html).

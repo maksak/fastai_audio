@@ -5,12 +5,12 @@ from fastai.callbacks.hooks import num_features_model
 from fastai.vision import create_body, create_head
 from fastai.vision.learner import cnn_config, _resnet_split
 
-__all__ = ['create_cnn']
+__all__ = ['cnn_learner']
 
 
 # copied from fastai.vision.learner, omitting unused args,
 # and adding channel summing of first convolutional layer
-def create_cnn(data, arch, pretrained=True, sum_channel_weights=True, **kwargs):
+def cnn_learner(data, arch, pretrained=True, sum_channel_weights=True, **kwargs):
     meta = cnn_config(arch)
     body = create_body(arch, pretrained)
 
