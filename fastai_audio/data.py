@@ -5,6 +5,7 @@ from fastai.text import SortSampler, SortishSampler
 from fastai.torch_core import *
 from .audio_clip import *
 
+
 __all__ = ['pad_collate1d', 'pad_collate2d', 'AudioDataBunch', 'AudioItemList', ]
 
 
@@ -91,11 +92,11 @@ class AudioItemList(ItemList):
         return lengths
 
     @classmethod
-    def from_df(cls, df, path, col=0, folder='.', suffix='', length_col=None):
+    def from_df(cls, df, path, cols=0, folder='.', suffix='', length_col=None):
         """Get the filenames in `col` of `df` and will had `path/folder` in front of them,
         `suffix` at the end. `create_func` is used to open the audio files."""
         suffix = suffix or ''
-        res = super().from_df(df, path=path, col=col, length_col=length_col)
+        res = super().from_df(df, path=path, cols=cols, length_col=length_col)
         res.items = np.char.add(np.char.add(f'{folder}/', res.items.astype(str)), suffix)
         res.items = np.char.add(f'{res.path}/', res.items)
         return res
