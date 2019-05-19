@@ -6,7 +6,7 @@ The accompanying article can be found here:
 [Audio Classification using FastAI and On-the-Fly Frequency Transforms](https://medium.com/@johnhartquist/audio-classification-using-fastai-and-on-the-fly-frequency-transforms-4dbe1b540f89)
 
 ### Installation
-`pip install git+https://github.com/maksak/fastai_audio.git` or `pip install git+https://github.com/maksak/fastai_audio.git@branch-foo`.
+`pip install git+https://github.com/maksak/fastai_audio.git` or `pip install git+https://github.com/maksak/fastai_audio.git@v1.0.51`.
 
 ##### Related Links
 * [fastai v1 docs](https://docs.fastai.com)
